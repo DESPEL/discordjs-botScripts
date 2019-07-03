@@ -2,8 +2,6 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const Discord = require('discord.js');
 
-let url = "https://www.crunchyroll.com/random/anime";
-
 const errors = {
     noArgs: 'The name of the anime is required',
     noLastSearch: `There's no more results`,
@@ -64,7 +62,7 @@ module.exports.anime = async function (message, bot, ...name) {
     }
 
     //Execute the search
-    lastAnimeSearch = await MALSearch('anime', name);
+    lastAnimeSearch = await MALSearch(name);
     //Create and send message
     let embed = new Discord.RichEmbed()
         .setColor(config.botColor)
@@ -84,7 +82,7 @@ function sendErrorMSG(message, errorText) {
     const embed = new Discord.RichEmbed()
         .setColor('0xFF0000')
         .setTitle('Error')
-        .setDescription('La cantidad de mensajes debe de ser un número');
+        .setDescription(errorText);
     message.channel.send(embed);
 }
 
